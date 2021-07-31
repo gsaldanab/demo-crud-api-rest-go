@@ -14,7 +14,10 @@ func GetAll(writer http.ResponseWriter, request *http.Request) {
 	personas := []models.Persona{}
 
 	db := commons.GetConnection()
-	defer db.Close()
+	defer func() {
+		dbConn, _ := db.DB()
+		dbConn.Close()
+	}()
 
 	db.Find(&personas)
 
@@ -29,7 +32,10 @@ func Get(writer http.ResponseWriter, request *http.Request) {
 	id := mux.Vars(request)["id"]
 
 	db := commons.GetConnection()
-	defer db.Close()
+	defer func() {
+		dbConn, _ := db.DB()
+		dbConn.Close()
+	}()
 
 	db.Find(&persona, id)
 
@@ -45,7 +51,10 @@ func Save(writer http.ResponseWriter, request *http.Request) {
 	persona := models.Persona{}
 
 	db := commons.GetConnection()
-	defer db.Close()
+	defer func() {
+		dbConn, _ := db.DB()
+		dbConn.Close()
+	}()
 
 	error := json.NewDecoder(request.Body).Decode(&persona)
 
@@ -71,7 +80,10 @@ func Save(writer http.ResponseWriter, request *http.Request) {
 func Delete(writer http.ResponseWriter, request *http.Request) {
 	persona := models.Persona{}
 	db := commons.GetConnection()
-	defer db.Close()
+	defer func() {
+		dbConn, _ := db.DB()
+		dbConn.Close()
+	}()
 
 	id := mux.Vars(request)["id"]
 
