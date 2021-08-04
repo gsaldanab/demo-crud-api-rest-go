@@ -12,7 +12,7 @@ import (
 
 func GetConnection() *gorm.DB {
 	// dsn := "root:mysql@tcp(go-mysql8:3306)/goSchema?charset=utf8mb4&parseTime=True&loc=Local"
-	dsn := "root:mysql@tcp(localhost:3306)/goSchema?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:mysql@tcp(mysql_service:3306)/goSchema?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	// db, err := gorm.Open("mysql", "root:mysql@go-mysql8/goSchema?charset=utf8")
 
